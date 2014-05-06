@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <string>
 #include <vector>
@@ -47,6 +48,11 @@ Vector::Vector(float a, float b, float c, int clas){
 };
 
 
+void Vector::setPoint(float f){
+	this->v.push_back(f);
+}
+
+
 void Vector::setPoints(){
 	// v.clear(); Entfernt alle Elemente aus v; leert v.
 	this->v.clear();
@@ -80,14 +86,8 @@ void Vector::setClas(){
 }
 
 
-void Vector::print(){
-	// v[n]; Repr‰sentiert das n. Element in v (ohne zu pr¸fen, dass n existiert).
-	int size = this->getSize();
-	for(int i=0;i<size;i++){
-		cout << left << setw(8) << v[i] << "  ";
-	}
-	cout << "|  " << this->clas;
-	cout << "\n";
+void Vector::setClas(int clas){
+	this->clas = clas;
 }
 
 
@@ -104,3 +104,71 @@ int Vector::getSize(){
 int Vector::getClas(){
 	return this->clas;
 }
+
+
+void Vector::print(){
+	// v[n]; Repr‰sentiert das n. Element in v (ohne zu pr¸fen, dass n existiert).
+	int size = this->getSize();
+	for(int i=0;i<size;i++){
+		cout << left << setw(8) << v[i] << "  ";
+	}
+	cout << "|  " << this->clas << "\n";
+}
+
+
+void Vector::clear(){
+	this->v.clear();
+}
+
+
+// NON Object functions
+
+void newVector(){
+	Vector* Vektor = new Vector();
+	writeVectortoFile(Vektor);
+}
+
+
+int writeVectortoFile(Vector* Vektor){
+
+	ofstream file("points.txt",ios::app);
+	if (file.is_open()){
+		file << "\n" ;
+			for(int i=0;i<ElementeJeVektor;i++){
+			// schreibe Punkte
+			file << Vektor->getPoint(i) << ",";
+		}
+		// schreibe Klasse
+		file << Vektor->getClas();
+
+		// Datei schlieﬂen
+		file.close();
+		cout << "\nPunkt in Datei geschrieben\n\n";
+		return 1;
+	}
+	else {
+		cout << "\nKonnte Datei nicht oeffnen!\n\n";
+		return 0;
+	}
+
+}
+
+
+void printVectors(){
+	string line;
+	ifstream file("points.txt",ios::in);
+	cout << "\n";
+	if (file.is_open()){
+		// auslesen
+		while(getline(file,line)){
+			cout << line << '\n';
+		}
+		// Datei schlieﬂen
+		file.close();
+		cout << "\n";
+	}
+	else {
+		cout << "\nKonnte Datei nicht oeffnen!\n\n";
+	}
+}
+

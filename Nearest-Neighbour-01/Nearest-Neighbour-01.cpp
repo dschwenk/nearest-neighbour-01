@@ -13,20 +13,11 @@
 
 int main(){
 	
-	// Maximal Anzahl an Vektoren
-	const int MAXANZAHLVEKTOREN = 10;
-	// aktuelle Anzahl an Vektoren
-	int AnzahlVektoren = 0;
-
-	Vector* VektorArray[MAXANZAHLVEKTOREN];
-
 	Vector* NaehsterVektor = new Vector(false);
 	Vector* ReferenzVektor = new Vector(0,0,0,0);
 
-	// initialisiere Arrays mit NULL
-	for(int i = 0;i<AnzahlVektoren;i++){
-		VektorArray[i] = NULL;
-	}
+	// Klasse des naehste Vektors
+	int clas = 0;
 
 	// benoetigt fuer Menuauswahl
 	char inputChoice = '\0';
@@ -34,7 +25,7 @@ int main(){
 
 	while(true){
 		cout << "Was wollen Sie tun?\n";
-		cout <<	"p - Vektor anlegen\n";
+		cout <<	"v - Vektor anlegen und zur Datei hinzufuegen\n";
 		cout << "l - Vektoren ausgeben\n";
 		cout << "r - Referenzvektor anpassen\n";
 		cout << "a - Referenzvektor ausgeben\n";
@@ -45,30 +36,13 @@ int main(){
 		cin >> inputChoice;
 
 		switch(inputChoice){
-			// neuer Punkt
-			case 'p':
-				if(AnzahlVektoren < MAXANZAHLVEKTOREN){
-					VektorArray[AnzahlVektoren] = new Vector();
-					AnzahlVektoren++;
-					cout << "\n";
-				}
-				else {
-					cout << "\nMaximal Anzahl an Vektoren erreicht!\n\n";
-				}
+			// neuer Vektor
+			case 'v':
+				newVector();
 				break;
 			// auflisten
 			case 'l':
-				// sind Medien vorhanden?
-				if(AnzahlVektoren != 0){
-					cout << "\nVektoren: \n";
-					for(int i=0;i<AnzahlVektoren;i++){
-						VektorArray[i]->print();
-					}
-					cout << "\n";
-				}
-				else {
-					cout << "\nKeine Vektoren vorhanden.\n\n";
-				}
+				printVectors();
 				break;
 			// Referenzvektor anpassen
 			case 'r':
@@ -82,17 +56,14 @@ int main(){
 				cout << "\n";
 				break;
 			case 'n':
-				NaehsterVektor = calcNearstNeighbour(ReferenzVektor, *VektorArray, AnzahlVektoren);
-				cout << "\nNaehester Vektor: \n";
-				NaehsterVektor->print();
-				cout << "\n";
+				clas = calcNearstNeighbour(ReferenzVektor);
+				cout << "\nKlasse: " << clas << "\n";
 				break;
 			// Verlassen
 			case 'q':
 				// Objekte loeschen
-				for(int i=0;i<AnzahlVektoren;i++){
-					delete VektorArray[i];
-				}
+				delete ReferenzVektor;
+				delete NaehsterVektor;
 				return 0;
 			default:
 				cout << "\nUngueltige Eingabe!\n\n";

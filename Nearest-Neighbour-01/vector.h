@@ -14,13 +14,15 @@ class Vector {
 		Vector();
 		Vector(bool);
 		Vector(float,float,float,int);
+		void setPoint(float);
 		void setPoints();
 		void setClas();
 		void setClas(int);
-		void print();
 		float getPoint(int);
 		int getSize();
 		int getClas();
+		void print();
+		void clear();
 	protected:
 		int clas;
 		std::vector<float> v;
@@ -28,3 +30,8 @@ class Vector {
 		vector<T> v(n, val); Deklariert v als vector, der bereits n Elemente vom Typ T mit dem Wert val enthält.
 		*/
 };
+
+
+void newVector();
+int writeVectortoFile(Vector* Vektor);
+void printVectors();

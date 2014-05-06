@@ -8,4 +8,4 @@
 
 using namespace std;
 
-Vector* calcNearstNeighbour(Vector* refVektor, Vector* arrVektor, int AnzahlVektoren);
+int calcNearstNeighbour(Vector* refVektor);
