@@ -48,12 +48,12 @@ Vector::Vector(float a, float b, float c, int clas){
 };
 
 
-void Vector::setPoint(float f){
+void Vector::addPoint(float f){
 	this->v.push_back(f);
 }
 
 
-void Vector::setPoints(){
+void Vector::addPoints(){
 	// v.clear(); Entfernt alle Elemente aus v; leert v.
 	this->v.clear();
 	// Punkte einlesen

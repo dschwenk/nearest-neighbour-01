@@ -1,7 +1,4 @@
 #include "stdafx.h"
-#include <iostream>
-#include <iomanip>
-#include <string>
 #include <vector>
 
 #include "vector.h"

@@ -13,10 +13,10 @@
 
 int main(){
 	
-	Vector* NaehsterVektor = new Vector(false);
+	// Vektor, zu dem der naehste Vektor gesucht werden soll
 	Vector* ReferenzVektor = new Vector(0,0,0,0);
 
-	// Klasse des naehste Vektors
+	// Rueckgabe Klasse des naehste Vektors
 	int clas = 0;
 
 	// benoetigt fuer Menuauswahl
@@ -36,25 +36,27 @@ int main(){
 		cin >> inputChoice;
 
 		switch(inputChoice){
-			// neuer Vektor
+			// neuer Vektor einlesen und in Datei schreiben
 			case 'v':
 				newVector();
 				break;
-			// auflisten
+			// Vektoren aus Datei auflisten
 			case 'l':
 				printVectors();
 				break;
 			// Referenzvektor anpassen
 			case 'r':
-				ReferenzVektor->setPoints();
+				ReferenzVektor->addPoints();
 				// ReferenzVektor->setClas();
 				cout << "\nReferenzvektor angepasst.\n\n";
 				break;
+			// Referenzvektor ausgeben			
 			case 'a':
 				cout << "\nReferenzVektor: \n";				
 				ReferenzVektor->print();
 				cout << "\n";
 				break;
+			// berechne kleinsten Abstand Vektoren aus Datei - Referenzvektor, zurueckgegeben wird Klasse des naehsten Vektors
 			case 'n':
 				clas = calcNearstNeighbour(ReferenzVektor);
 				cout << "\nKlasse: " << clas << "\n";
@@ -63,7 +65,6 @@ int main(){
 			case 'q':
 				// Objekte loeschen
 				delete ReferenzVektor;
-				delete NaehsterVektor;
 				return 0;
 			default:
 				cout << "\nUngueltige Eingabe!\n\n";

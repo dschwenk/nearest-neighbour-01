@@ -14,8 +14,8 @@ class Vector {
 		Vector();
 		Vector(bool);
 		Vector(float,float,float,int);
-		void setPoint(float);
-		void setPoints();
+		void addPoint(float);
+		void addPoints();
 		void setClas();
 		void setClas(int);
 		float getPoint(int);
